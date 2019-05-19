@@ -5,11 +5,17 @@
  */
 package businesstier;
 
+import integrationtier.ClientFacade;
+import integrationtier.RecordFacade;
+import integrationtier.RentalFacade;
+import integrationtier.ReservationFacade;
+import integrationtier.TitleRecordFacade;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import subbusinesstier.Facade;
 
@@ -22,6 +28,22 @@ import subbusinesstier.Facade;
 @Stateless
 public class EJBFacade implements EJBFacadeRemote {
 
+    @EJB
+    private ClientFacade clientFacade;
+
+    @EJB
+    private RecordFacade recordFacade;
+
+    @EJB
+    private RentalFacade rentalFacade;
+
+    @EJB
+    private ReservationFacade reservationFacade;
+
+    @EJB
+    private TitleRecordFacade titleRecordFacade;
+    
+    
     Facade facade = new Facade();
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
