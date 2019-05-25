@@ -5,6 +5,7 @@
  */
 package integrationtier;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,7 @@ public class ClientFacade extends AbstractFacade<Client> {
         super(Client.class);
     }
     
+    public void addClients(List<Client> clients){
+        
+    }
 }

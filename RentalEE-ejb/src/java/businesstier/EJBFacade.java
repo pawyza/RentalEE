@@ -11,13 +11,13 @@ import integrationtier.RentalFacade;
 import integrationtier.ReservationFacade;
 import integrationtier.TitleRecordFacade;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import subbusinesstier.Facade;
+import subbusinesstier.entities.TitleRecord;
+import subbusinesstier.entities.Client;
 
 
       
@@ -49,23 +49,23 @@ public class EJBFacade implements EJBFacadeRemote {
     // "Insert Code > Add Business Method")
 
     @Override
-    public void deleteClient(int number) {
-        facade.deleteClient(number);
+    public Long deleteClient(int number) {
+        return facade.deleteClient(number); 
     }
 
     @Override
-    public void deleteTitleRecord(String id) {
-        facade.deleteTitleRecord(id);
+    public Long deleteTitleRecord(int number) {
+        return facade.deleteTitleRecord(number);
     }
 
     @Override
-    public void deleteReservation(int number) {
-        facade.deleteReservation(number);
+    public Long deleteReservation(int number) {
+        return facade.deleteReservation(number);
     }
 
     @Override
-    public void deleteRecord(int number) {
-        facade.deleteRecord(number);
+    public Long deleteRecord(int number) {
+        return facade.deleteRecord(number);
     }
     
     @Override
@@ -100,7 +100,7 @@ public class EJBFacade implements EJBFacadeRemote {
     }
        
     @Override
-    public String transformTitleRecordIndexToString(int index){
+    public int transformTitleRecordIndexToNumber(int index){
         return facade.transformTitleRecordIndexToString(index);
     }
 
@@ -147,5 +147,71 @@ public class EJBFacade implements EJBFacadeRemote {
     @Override
     public List<String[]> getClientStrings() {
         return facade.getClientStrings();
+    }
+
+    @Override
+    public void persistReservationsDB() throws Exception {
+        titleRecordFacade.addTitleRecords(facade.getTitleRecords());
+        recordFacade.addRecords(facade.getRecordsList());
+        clientFacade.addClients(facade.getClients());
+        reservationFacade.addReservations(facade.getReservationList());
+    }
+
+    @Override
+    public void persistTitleRecordsDB() throws Exception {
+        titleRecordFacade.addTitleRecords(facade.getTitleRecords());
+    }
+
+    @Override
+    public void persistRecordsDB() throws Exception {
+        titleRecordFacade.addTitleRecords(facade.getTitleRecords());
+        recordFacade.addRecords(facade.getRecordsList());
+    }
+
+    @Override
+    public void persistClientsDB() throws Exception {
+        clientFacade.addClients(facade.getClients());
+    }
+
+    @Override
+    public ArrayList<String[]> showReservationsDB() throws Exception {
+        List<Client> help1 = clientFacade.findAll();
+        ArrayList<String[]> help2 = new ArrayList();
+        for (Client client : help1){
+            List<String[]> help3 = client.getReservationStrings();
+            help2.addAll(help3);
+        }
+        return help2;
+    }
+
+    @Override
+    public ArrayList<String[]> showTitleRecordsDB() throws Exception {
+        List<TitleRecord> help1 = titleRecordFacade.findAll();
+        ArrayList<String[]> help2 = new ArrayList();
+        for (TitleRecord titleRecord : help1){
+            help2.add(titleRecord.toString_());
+        }
+        return help2;
+    }
+
+    @Override
+    public ArrayList<String[]> showRecordsDB() throws Exception {
+        List<TitleRecord> help1 = titleRecordFacade.findAll();
+        ArrayList<String[]> help2 = new ArrayList();
+        for (TitleRecord titleRecord : help1){
+            List<String[]> help3 = titleRecord.getRecordStrings();
+            help2.addAll(help3);
+        }
+        return help2;
+    }
+
+    @Override
+    public ArrayList<String[]> showClientsDB() throws Exception {
+        List<Client> help1 = clientFacade.findAll();
+        ArrayList<String[]> help2 = new ArrayList();
+        for (Client client : help1){
+            help2.add(client.toString_());
+        }
+        return help2;
     }
 }
