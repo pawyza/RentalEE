@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import subbusinesstier.entities.Record;
+import subbusinesstier.entities.TitleRecord;
 
 /**
  *
@@ -30,7 +31,14 @@ public class RecordFacade extends AbstractFacade<Record> {
         super(Record.class);
     }
     
-    public void addRecords(List<Record> records){
-        
+    public void addRecords(List<TitleRecord> titleRecords ){
+        for (TitleRecord titleRecord:titleRecords){
+            if (titleRecord.getId() ==null){
+                continue;
+            } 
+            for (Record record:titleRecord.getRecords()){
+                if (record.getId() == null) getEntityManager().persist(record);
+            }
+        }
     }
 }

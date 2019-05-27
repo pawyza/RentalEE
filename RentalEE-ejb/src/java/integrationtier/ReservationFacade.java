@@ -9,7 +9,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import subbusinesstier.entities.Client;
 import subbusinesstier.entities.Reservation;
+import subbusinesstier.entities.TitleRecord;
 
 /**
  *
@@ -30,7 +32,15 @@ public class ReservationFacade extends AbstractFacade<Reservation> {
         super(Reservation.class);
     }
     
-    public void addReservations(List<Reservation> reservations){
-        
+    public void addReservations(List<Client> clients){
+        for (Client client:clients){
+            if (client.getId() ==null){
+                continue;
+            } 
+            for (Reservation reservation:client.getReservations()){
+                if (reservation.getId() == null)
+                    getEntityManager().persist(reservation);
+            }
+        }
     }
 }

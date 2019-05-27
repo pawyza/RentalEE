@@ -31,6 +31,10 @@ public class TitleRecordFacade extends AbstractFacade<TitleRecord> {
     }
     
     public void addTitleRecords (List<TitleRecord> titleRecords){
-        
+        for (TitleRecord titleRecord:titleRecords){
+            if (titleRecord.getId() ==null){
+                getEntityManager().persist(titleRecord);
+            } 
+        }
     }
 }

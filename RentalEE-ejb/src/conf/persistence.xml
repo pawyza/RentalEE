@@ -4,8 +4,6 @@
     <jta-data-source>jdbc/RentalJNDI</jta-data-source>
     <class>subbusinesstier.entities.Client</class>
     <class>subbusinesstier.entities.Record</class>
-    <class>subbusinesstier.entities.Rental</class>
-    <class>subbusinesstier.entities.Reservation</class>
     <class>subbusinesstier.entities.TitleRecord</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
