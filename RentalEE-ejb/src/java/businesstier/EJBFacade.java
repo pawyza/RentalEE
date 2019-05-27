@@ -151,9 +151,6 @@ public class EJBFacade implements EJBFacadeRemote {
 
     @Override
     public void persistReservationsDB() throws Exception {
-        titleRecordFacade.addTitleRecords(facade.getTitleRecords());
-        recordFacade.addRecords(facade.getRecordsList());
-        clientFacade.addClients(facade.getClients());
         reservationFacade.addReservations(facade.getReservationList());
     }
 
@@ -164,7 +161,6 @@ public class EJBFacade implements EJBFacadeRemote {
 
     @Override
     public void persistRecordsDB() throws Exception {
-        titleRecordFacade.addTitleRecords(facade.getTitleRecords());
         recordFacade.addRecords(facade.getRecordsList());
     }
 
