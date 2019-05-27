@@ -34,11 +34,11 @@ public class ReservationFacade extends AbstractFacade<Reservation> {
     
     public void addReservations(List<Client> clients){
         for (Client client:clients){
-            if (client.getId() ==null){
+            if (client.getId() != null){
                 continue;
             } 
             for (Reservation reservation:client.getReservations()){
-                if (reservation.getId() == null)
+                if (reservation.getId() != null)
                     getEntityManager().persist(reservation);
             }
         }
