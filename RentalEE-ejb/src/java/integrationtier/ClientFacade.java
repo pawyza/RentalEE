@@ -32,7 +32,7 @@ public class ClientFacade extends AbstractFacade<Client> {
     
     public void addClients(List<Client> clients){
         for (Client client:clients){
-            if (client.getId() != null){
+            if (client.getNumber() != null){
                 getEntityManager().persist(client);
             } 
         }

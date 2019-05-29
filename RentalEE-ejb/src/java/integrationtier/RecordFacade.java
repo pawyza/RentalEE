@@ -33,11 +33,11 @@ public class RecordFacade extends AbstractFacade<Record> {
     
     public void addRecords(List<TitleRecord> titleRecords ){
         for (TitleRecord titleRecord:titleRecords){
-            if (titleRecord.getId() != null){
+            if (titleRecord.getNumber() != null){
                 continue;
             } 
             for (Record record:titleRecord.getRecords()){
-                if (record.getId() != null) getEntityManager().persist(record);
+                if (record.getNumber() != null) getEntityManager().persist(record);
             }
         }
     }
